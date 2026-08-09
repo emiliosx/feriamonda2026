@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feria de Monda 2026</title>
+<meta name="description" content="Cuenta atrás para la Feria de Monda 2026, del 13 al 17 de agosto.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --night-1:#14173c;
+  --night-2:#1f2568;
+  --night-3:#2a2f7a;
+  --gold:#e8b23d;
+  --magenta:#d6336c;
+  --teal:#3fae9e;
+  --white:#fff8ec;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family:'Work Sans',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  background:radial-gradient(ellipse at 50% -10%, var(--night-3), var(--night-1) 65%);
+  color:var(--white);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+}
+
+.hero{
+  width:100%;
+  max-width:760px;
+  padding:56px 24px;
+  text-align:center;
+}
+.lights{
+  display:flex;
+  justify-content:center;
+  gap:22px;
+  margin-bottom:30px;
+  flex-wrap:wrap;
+}
+.lights span{
+  width:11px;height:11px;border-radius:50%;
+  display:inline-block;
+  animation:glow 2.6s ease-in-out infinite;
+}
+.lights span:nth-child(3n){background:var(--gold);box-shadow:0 0 12px 3px rgba(232,178,61,.8);}
+.lights span:nth-child(3n+1){background:var(--magenta);box-shadow:0 0 12px 3px rgba(214,51,108,.75); animation-delay:.5s;}
+.lights span:nth-child(3n+2){background:var(--teal);box-shadow:0 0 12px 3px rgba(63,174,158,.75); animation-delay:1s;}
+@keyframes glow{0%,100%{opacity:.55; transform:scale(0.9);}50%{opacity:1; transform:scale(1.1);}}
+
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  font-size:12px;
+  color:var(--gold);
+  margin:0 0 14px;
+}
+h1.title{
+  font-family:'Fraunces',serif;
+  font-weight:900;
+  font-size:clamp(38px,8vw,84px);
+  line-height:0.95;
+  margin:0 0 10px;
+  letter-spacing:-0.01em;
+}
+h1.title em{
+  font-style:italic;
+  font-weight:600;
+  color:var(--gold);
+}
+.subdate{
+  font-size:16px;
+  color:#c9c9e6;
+  margin:0 0 48px;
+}
+.subdate strong{color:var(--white);}
+
+.counters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media (max-width:560px){ .counters{grid-template-columns:1fr;} }
+
+.counter-card{
+  background:rgba(255,248,236,0.05);
+  border:1px solid rgba(255,248,236,0.16);
+  border-radius:4px;
+  padding:26px 20px 22px;
+}
+.counter-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:0 0 16px;
+}
+.counter-card.fin .counter-label{color:var(--magenta);}
+.digits{display:flex; justify-content:center; gap:10px;}
+.digit-block{text-align:center;}
+.digit-num{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:clamp(24px,6vw,40px);
+  font-variant-numeric:tabular-nums;
+  background:rgba(0,0,0,0.25);
+  border-radius:4px;
+  padding:6px 4px;
+  min-width:50px;
+  display:block;
+}
+.digit-unit{
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#a9a9cf;
+  margin-top:6px;
+  display:block;
+}
+.status-msg{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:19px;
+  color:var(--gold);
+}
+footer{
+  margin-top:44px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  color:#8686b8;
+}
+
+/* ---------- PROGRAMA ---------- */
+.programa{
+  width:100%;
+  max-width:760px;
+  margin:8px auto 0;
+  padding:0 24px 64px;
+  text-align:left;
+}
+.programa h2{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  font-size:26px;
+  text-align:center;
+  margin:0 0 24px;
+  color:var(--white);
+}
+.day-tabs{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.day-tab{
+  font-family:'Work Sans',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  color:#c9c9e6;
+  background:rgba(255,248,236,0.06);
+  border:1px solid rgba(255,248,236,0.18);
+  border-radius:4px;
+  padding:10px 16px;
+  cursor:pointer;
+  text-align:center;
+  transition:background .15s, color .15s;
+}
+.day-tab .d{
+  display:block;
+  font-family:'Fraunces',serif;
+  font-size:19px;
+  font-weight:700;
+  color:var(--white);
+}
+.day-tab.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--night-1);
+}
+.day-tab.active .d{color:var(--night-1);}
+.day-tab:focus-visible{outline:2px solid var(--magenta); outline-offset:2px;}
+
+.programa-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  background:rgba(255,248,236,0.05);
+  border:1px solid rgba(255,248,236,0.16);
+  border-radius:4px;
+}
+.programa-list li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,248,236,0.1);
+}
+.programa-list li:last-child{border-bottom:none;}
+.programa-list .time{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:14px;
+  color:var(--gold);
+  min-width:50px;
+}
+.programa-list .info strong{
+  display:block;
+  font-size:15px;
+  color:var(--white);
+  margin-bottom:3px;
+}
+.programa-list .info span.cat{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#a9a9cf;
+}
+.programa-list .info span.place{
+  display:block;
+  font-size:12.5px;
+  color:#c9c9e6;
+  margin-top:3px;
+}
+.programa-empty{
+  padding:30px 18px;
+  text-align:center;
+  font-style:italic;
+  color:#a9a9cf;
+  font-size:14px;
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="lights" id="lights"></div>
+  <p class="eyebrow">Ayuntamiento de Monda</p>
+  <h1 class="title">Feria de <em>Monda</em> 2026</h1>
+  <p class="subdate">Del <strong>13</strong> al <strong>17 de agosto</strong> &mdash; fin a las <strong>8:00 h</strong> del día 17</p>
+
+  <div class="counters">
+    <div class="counter-card inicio">
+      <p class="counter-label">Comienza en</p>
+      <div id="cd-inicio"></div>
+    </div>
+    <div class="counter-card fin">
+      <p class="counter-label">Finaliza en</p>
+      <div id="cd-fin"></div>
+    </div>
+  </div>
+  <footer>FERIA DE MONDA · 13&ndash;17 AGO 2026</footer>
+</div>
+
+<div class="programa">
+  <h2>Programa de actividades</h2>
+  <div class="day-tabs" id="prog-tabs"></div>
+  <ul class="programa-list" id="prog-list"></ul>
+</div>
+
+<script>
+(function(){
+  const lightsEl = document.getElementById('lights');
+  for(let i=0;i<11;i++){ const s=document.createElement('span'); lightsEl.appendChild(s); }
+
+  const START = new Date('2026-08-13T00:00:00');
+  const END   = new Date('2026-08-17T08:00:00');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function block(val,label){
+    return '<div class="digit-block"><span class="digit-num">'+pad(val)+'</span><span class="digit-unit">'+label+'</span></div>';
+  }
+  function renderCounter(el, target, doneMsg){
+    const diff = target - new Date();
+    if(diff <= 0){
+      el.innerHTML = '<p class="status-msg">'+doneMsg+'</p>';
+      return;
+    }
+    const s = Math.floor(diff/1000);
+    const days = Math.floor(s/86400);
+    const hours = Math.floor((s%86400)/3600);
+    const mins = Math.floor((s%3600)/60);
+    const secs = s%60;
+    el.innerHTML = '<div class="digits">'+block(days,'Días')+block(hours,'Horas')+block(mins,'Min')+block(secs,'Seg')+'</div>';
+  }
+  function tick(){
+    renderCounter(document.getElementById('cd-inicio'), START, '¡La feria ha comenzado!');
+    renderCounter(document.getElementById('cd-fin'), END, 'La feria ha finalizado');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // ---------- Programa de actividades ----------
+  const PROGRAMA = {
+    '2026-08-13': [
+      { time:'21:30', title:'Encendido oficial de la Velada de Feria 2026', cat:'Actividad', place:'Plaza de la Constitución' },
+      { time:'23:00', title:'Comienza la feria de noche, amenizada por la Orquesta Plenitud', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'00:00', title:'Pregón de la Feria 2026 a cargo de María Lorente Domínguez', cat:'Actividad', place:'Plaza de la Constitución' },
+      { time:'00:45', title:'Coronación de las Reinas, Damas y Acompañantes Infantiles y Juveniles 2026', cat:'Actividad', place:'Plaza de la Constitución' },
+      { time:'01:45', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { time:'01:00', title:'Caseta de la Juventud — DJ Chris (01:00 a 03:00 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad', place:'Caseta de la Juventud' },
+      { time:'03:00', title:'Caseta de la Juventud — DJ Mike Martín (03:00 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'04:30', title:'Caseta de la Juventud — DJ Gámez (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+    ],
+    '2026-08-14': [
+      { time:'12:30', title:'Fiesta acuática con hinchables para los más pequeños con «Timbleque»', cat:'Actividad', place:'Plaza de la Constitución' },
+      { time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Bandidos Pervesions', cat:'Actuación' },
+      { time:'16:30', title:'Degustación de cerveza Alhambra, por cortesía de Javier Ruiz Urbano', cat:'Actividad' },
+      { time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'18:00', title:'Ludoteca — Circo', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'19:00', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { time:'23:00', title:'Comienza la feria de noche amenizada por la orquesta Plenitud', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'00:00', title:'Actuación de Ginés González', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { time:'00:00', title:'Caseta de la Juventud — DJ Guille Anglo (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad', place:'Caseta de la Juventud' },
+      { time:'02:30', title:'Caseta de la Juventud — Javi Torres y Rubén Hernández (02:30 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'04:30', title:'Caseta de la Juventud — DJ Ezequiel Rodríguez (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+    ],
+    '2026-08-15': [
+      { time:'12:30', title:'Pasacalles y espectáculo de animación con La Carpa Teatro', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'12:45', title:'Misa rociera en honor a la Santísima Virgen, cantada por el Coro Rociero de Monda', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
+      { time:'15:30', title:'Degustación de rebujito', cat:'Actividad' },
+      { time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Pop FM', cat:'Actuación' },
+      { time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'18:00', title:'Ludoteca — Baile y juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'20:00', title:'Ludoteca — Cañón de espuma y pompas', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { time:'23:00', title:'Comienza la feria de noche con el grupo de baile local Aire Andaluz', cat:'Actuación' },
+      { time:'00:30', title:'Actuación de Rafa Sánchez, de La Unión', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'02:30', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
+      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { time:'00:00', title:'Caseta de la Juventud — DJ Alex Moon (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'02:30', title:'Caseta de la Juventud — DJ Juan Aragón (02:30 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { time:'04:30', title:'Caseta de la Juventud — DJ Jorge Tallón (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+    ],
+    '2026-08-16': [
+      { time:'12:30', title:'Espectáculo de animación infantil con La Carpa Teatro', cat:'Actividad', place:'Plaza de la Constitución' },
+      { time:'15:00', title:'Apertura de la feria de día con los grupos Kalima y Del Juré', cat:'Actuación' },
+      { time:'15:30', title:'Degustación de gazpacho andaluz', cat:'Actividad' },
+      { time:'17:00', title:'Ludoteca — Magia', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'18:30', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'19:30', title:'Ludoteca — Juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
+      { time:'19:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { time:'19:30', title:'Misa en honor a San Roque e imposición de medallas', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
+      { time:'20:15', title:'Procesión en honor a San Roque, con la Agrupación Musical de Marbella', cat:'Actividad' },
+      { time:'23:00', title:'Comienza la feria de noche amenizada por la coplera Macarena Albarracín', cat:'Actuación' },
+      { time:'00:00', title:'Actuación de Juan Salazar «El Chunguito»', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
+      { time:'03:30', title:'Traca fin de fiesta y cotillón', cat:'Actividad' },
+      { time:'', title:'Fin de la Feria de Noche: «Continuaremos bailando y disfrutando hasta que el cuerpo aguante»', cat:'Actividad' }
+    ],
+    '2026-08-17': []
+  };
+  const DAYS = ['2026-08-13','2026-08-14','2026-08-15','2026-08-16','2026-08-17'];
+  let activeProgDay = DAYS[0];
+
+  function renderProgTabs(){
+    const tabs = document.getElementById('prog-tabs');
+    tabs.innerHTML = '';
+    DAYS.forEach(d=>{
+      const dateObj = new Date(d+'T12:00:00');
+      const weekday = dateObj.toLocaleDateString('es-ES', {weekday:'short'}).replace('.','');
+      const dayNum = dateObj.getDate();
+      const btn = document.createElement('button');
+      btn.className = 'day-tab' + (d===activeProgDay ? ' active':'');
+      btn.setAttribute('data-day', d);
+      btn.innerHTML = weekday.charAt(0).toUpperCase()+weekday.slice(1) + '<span class="d">'+dayNum+'</span>';
+      tabs.appendChild(btn);
+    });
+  }
+  document.getElementById('prog-tabs').addEventListener('click', function(e){
+    const btn = e.target.closest('.day-tab');
+    if(!btn) return;
+    activeProgDay = btn.getAttribute('data-day');
+    renderProgTabs();
+    renderProgList();
+  });
+
+  function renderProgList(){
+    const list = document.getElementById('prog-list');
+    const entries = PROGRAMA[activeProgDay] || [];
+    if(entries.length === 0){
+      list.innerHTML = '<li class="programa-empty">Programa por confirmar para este día.</li>';
+      return;
+    }
+    list.innerHTML = entries.map(e =>
+      '<li><span class="time">'+(e.time || '—')+'</span><div class="info"><strong>'+e.title+'</strong><span class="cat">'+e.cat+'</span>'+(e.place ? '<span class="place">'+e.place+'</span>' : '')+'</div></li>'
+    ).join('');
+  }
+
+  renderProgTabs();
+  renderProgList();
+})();
+</script>
+</body>
+</html>
