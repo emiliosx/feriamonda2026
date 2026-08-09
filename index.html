@@ -195,22 +195,7 @@ footer{
 .day-tab.active .d{color:var(--night-1);}
 .day-tab:focus-visible{outline:2px solid var(--magenta); outline-offset:2px;}
 
-.programa-list{
-  list-style:none;
-  margin:0;
-  padding:0;
-  background:rgba(255,248,236,0.05);
-  border:1px solid rgba(255,248,236,0.16);
-  border-radius:4px;
-}
-.programa-list li{
-  display:flex;
-  gap:14px;
-  align-items:flex-start;
-  padding:16px 18px;
-  border-bottom:1px solid rgba(255,248,236,0.1);
-}
-.programa-list li:last-child{border-bottom:none;}
+.programa-list{ margin:0; padding:0; }
 .programa-list .time{
   font-family:'JetBrains Mono',monospace;
   font-weight:700;
@@ -244,6 +229,45 @@ footer{
   color:#a9a9cf;
   font-size:14px;
 }
+.period-block{margin-bottom:22px;}
+.period-block:last-child{margin-bottom:0;}
+.period-heading{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  font-style:italic;
+  font-size:17px;
+  color:var(--gold);
+  margin:0 0 10px;
+  padding-left:2px;
+}
+.venue-block{
+  background:rgba(255,248,236,0.05);
+  border:1px solid rgba(255,248,236,0.16);
+  border-radius:4px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.venue-block:last-child{margin-bottom:0;}
+.venue-heading{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--night-1);
+  background:var(--teal);
+  padding:8px 14px;
+}
+.venue-block.caseta .venue-heading{background:var(--magenta);}
+.venue-block.otros .venue-heading{background:var(--gold);}
+.venue-list{list-style:none; margin:0; padding:0;}
+.venue-list li{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,248,236,0.1);
+}
+.venue-list li:last-child{border-bottom:none;}
 </style>
 </head>
 <body>
@@ -269,7 +293,7 @@ footer{
 <div class="programa">
   <h2>Programa de actividades</h2>
   <div class="day-tabs" id="prog-tabs"></div>
-  <ul class="programa-list" id="prog-list"></ul>
+  <div class="programa-list" id="prog-list"></div>
 </div>
 
 <script>
@@ -305,72 +329,75 @@ footer{
   setInterval(tick, 1000);
 
   // ---------- Programa de actividades ----------
+  // period: 'dia' | 'noche'   |   venue: 'plaza' | 'caseta' | 'otros'
   const PROGRAMA = {
     '2026-08-13': [
-      { time:'21:30', title:'Encendido oficial de la Velada de Feria 2026', cat:'Actividad', place:'Plaza de la Constitución' },
-      { time:'23:00', title:'Comienza la feria de noche, amenizada por la Orquesta Plenitud', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'00:00', title:'Pregón de la Feria 2026 a cargo de María Lorente Domínguez', cat:'Actividad', place:'Plaza de la Constitución' },
-      { time:'00:45', title:'Coronación de las Reinas, Damas y Acompañantes Infantiles y Juveniles 2026', cat:'Actividad', place:'Plaza de la Constitución' },
-      { time:'01:45', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
-      { time:'01:00', title:'Caseta de la Juventud — DJ Chris (01:00 a 03:00 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad', place:'Caseta de la Juventud' },
-      { time:'03:00', title:'Caseta de la Juventud — DJ Mike Martín (03:00 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'04:30', title:'Caseta de la Juventud — DJ Gámez (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+      { period:'noche', venue:'plaza', time:'21:30', title:'Encendido oficial de la Velada de Feria 2026', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'23:00', title:'Comienza la feria de noche, amenizada por la Orquesta Plenitud', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'00:00', title:'Pregón de la Feria 2026 a cargo de María Lorente Domínguez', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'00:45', title:'Coronación de las Reinas, Damas y Acompañantes Infantiles y Juveniles 2026', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'01:45', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { period:'noche', venue:'caseta', time:'01:00', title:'DJ Chris (01:00 a 03:00 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { period:'noche', venue:'caseta', time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad' },
+      { period:'noche', venue:'caseta', time:'03:00', title:'DJ Mike Martín (03:00 a 04:30 h)', cat:'Actuación' },
+      { period:'noche', venue:'caseta', time:'04:30', title:'DJ Gámez (04:30 a 06:30 h)', cat:'Actuación' }
     ],
     '2026-08-14': [
-      { time:'12:30', title:'Fiesta acuática con hinchables para los más pequeños con «Timbleque»', cat:'Actividad', place:'Plaza de la Constitución' },
-      { time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Bandidos Pervesions', cat:'Actuación' },
-      { time:'16:30', title:'Degustación de cerveza Alhambra, por cortesía de Javier Ruiz Urbano', cat:'Actividad' },
-      { time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'18:00', title:'Ludoteca — Circo', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'19:00', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
-      { time:'23:00', title:'Comienza la feria de noche amenizada por la orquesta Plenitud', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'00:00', title:'Actuación de Ginés González', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
-      { time:'00:00', title:'Caseta de la Juventud — DJ Guille Anglo (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad', place:'Caseta de la Juventud' },
-      { time:'02:30', title:'Caseta de la Juventud — Javi Torres y Rubén Hernández (02:30 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'04:30', title:'Caseta de la Juventud — DJ Ezequiel Rodríguez (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+      { period:'dia', venue:'plaza', time:'12:30', title:'Fiesta acuática con hinchables para los más pequeños con «Timbleque»', cat:'Actividad' },
+      { period:'dia', venue:'plaza', time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Bandidos Pervesions', cat:'Actuación' },
+      { period:'dia', venue:'plaza', time:'16:30', title:'Degustación de cerveza Alhambra, por cortesía de Javier Ruiz Urbano', cat:'Actividad' },
+      { period:'dia', venue:'otros', time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'18:00', title:'Ludoteca — Circo', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'19:00', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'plaza', time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'23:00', title:'Comienza la feria de noche amenizada por la orquesta Plenitud', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'00:00', title:'Actuación de Ginés González', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { period:'noche', venue:'caseta', time:'00:00', title:'DJ Guille Anglo (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { period:'noche', venue:'caseta', time:'01:00', title:'Vídeo 360º Glitter Bar (01:00 a 04:00 h)', cat:'Actividad' },
+      { period:'noche', venue:'caseta', time:'02:30', title:'Javi Torres y Rubén Hernández (02:30 a 04:30 h)', cat:'Actuación' },
+      { period:'noche', venue:'caseta', time:'04:30', title:'DJ Ezequiel Rodríguez (04:30 a 06:30 h)', cat:'Actuación' }
     ],
     '2026-08-15': [
-      { time:'12:30', title:'Pasacalles y espectáculo de animación con La Carpa Teatro', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'12:45', title:'Misa rociera en honor a la Santísima Virgen, cantada por el Coro Rociero de Monda', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
-      { time:'15:30', title:'Degustación de rebujito', cat:'Actividad' },
-      { time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Pop FM', cat:'Actuación' },
-      { time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'18:00', title:'Ludoteca — Baile y juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'20:00', title:'Ludoteca — Cañón de espuma y pompas', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
-      { time:'23:00', title:'Comienza la feria de noche con el grupo de baile local Aire Andaluz', cat:'Actuación' },
-      { time:'00:30', title:'Actuación de Rafa Sánchez, de La Unión', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'02:30', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
-      { time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
-      { time:'00:00', title:'Caseta de la Juventud — DJ Alex Moon (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'02:30', title:'Caseta de la Juventud — DJ Juan Aragón (02:30 a 04:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
-      { time:'04:30', title:'Caseta de la Juventud — DJ Jorge Tallón (04:30 a 06:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' }
+      { period:'dia', venue:'plaza', time:'12:30', title:'Pasacalles y espectáculo de animación con La Carpa Teatro', cat:'Actuación' },
+      { period:'dia', venue:'otros', time:'12:45', title:'Misa rociera en honor a la Santísima Virgen, cantada por el Coro Rociero de Monda', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
+      { period:'dia', venue:'plaza', time:'15:30', title:'Degustación de rebujito', cat:'Actividad' },
+      { period:'dia', venue:'plaza', time:'16:00', title:'Comienza la feria de día con el grupo Kalima y Pop FM', cat:'Actuación' },
+      { period:'dia', venue:'otros', time:'17:00', title:'Ludoteca — Cuentacuentos', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'18:00', title:'Ludoteca — Baile y juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'20:00', title:'Ludoteca — Cañón de espuma y pompas', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'plaza', time:'21:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'23:00', title:'Comienza la feria de noche con el grupo de baile local Aire Andaluz', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'00:30', title:'Actuación de Rafa Sánchez, de La Unión', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'02:30', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'07:00', title:'Finalización de la Feria de Noche', cat:'Actividad' },
+      { period:'noche', venue:'caseta', time:'00:00', title:'DJ Alex Moon (00:00 a 02:30 h)', cat:'Actuación', place:'Patio del Colegio CEIP Remedios Rojo (La Villeta)' },
+      { period:'noche', venue:'caseta', time:'02:30', title:'DJ Juan Aragón (02:30 a 04:30 h)', cat:'Actuación' },
+      { period:'noche', venue:'caseta', time:'04:30', title:'DJ Jorge Tallón (04:30 a 06:30 h)', cat:'Actuación' }
     ],
     '2026-08-16': [
-      { time:'12:30', title:'Espectáculo de animación infantil con La Carpa Teatro', cat:'Actividad', place:'Plaza de la Constitución' },
-      { time:'15:00', title:'Apertura de la feria de día con los grupos Kalima y Del Juré', cat:'Actuación' },
-      { time:'15:30', title:'Degustación de gazpacho andaluz', cat:'Actividad' },
-      { time:'17:00', title:'Ludoteca — Magia', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'18:30', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'19:30', title:'Ludoteca — Juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
-      { time:'19:00', title:'Finalización de la feria de día', cat:'Actividad' },
-      { time:'19:30', title:'Misa en honor a San Roque e imposición de medallas', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
-      { time:'20:15', title:'Procesión en honor a San Roque, con la Agrupación Musical de Marbella', cat:'Actividad' },
-      { time:'23:00', title:'Comienza la feria de noche amenizada por la coplera Macarena Albarracín', cat:'Actuación' },
-      { time:'00:00', title:'Actuación de Juan Salazar «El Chunguito»', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación', place:'Plaza de la Constitución' },
-      { time:'03:30', title:'Traca fin de fiesta y cotillón', cat:'Actividad' },
-      { time:'', title:'Fin de la Feria de Noche: «Continuaremos bailando y disfrutando hasta que el cuerpo aguante»', cat:'Actividad' }
+      { period:'dia', venue:'plaza', time:'12:30', title:'Espectáculo de animación infantil con La Carpa Teatro', cat:'Actividad' },
+      { period:'dia', venue:'plaza', time:'15:00', title:'Apertura de la feria de día con los grupos Kalima y Del Juré', cat:'Actuación' },
+      { period:'dia', venue:'plaza', time:'15:30', title:'Degustación de gazpacho andaluz', cat:'Actividad' },
+      { period:'dia', venue:'otros', time:'17:00', title:'Ludoteca — Magia', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'18:30', title:'Ludoteca — Cine infantil', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'otros', time:'19:30', title:'Ludoteca — Juegos de feria', cat:'Actividad', place:'Auditorio Municipal' },
+      { period:'dia', venue:'plaza', time:'19:00', title:'Finalización de la feria de día', cat:'Actividad' },
+      { period:'dia', venue:'otros', time:'19:30', title:'Misa en honor a San Roque e imposición de medallas', cat:'Actividad', place:'Iglesia Santiago Apóstol' },
+      { period:'dia', venue:'otros', time:'20:15', title:'Procesión en honor a San Roque, con la Agrupación Musical de Marbella', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'23:00', title:'Comienza la feria de noche amenizada por la coplera Macarena Albarracín', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'00:00', title:'Actuación de Juan Salazar «El Chunguito»', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'02:00', title:'Actuación de las orquestas Plenitud y Zafiro', cat:'Actuación' },
+      { period:'noche', venue:'plaza', time:'03:30', title:'Traca fin de fiesta y cotillón', cat:'Actividad' },
+      { period:'noche', venue:'plaza', time:'', title:'Fin de la Feria de Noche: «Continuaremos bailando y disfrutando hasta que el cuerpo aguante»', cat:'Actividad' }
     ],
     '2026-08-17': []
   };
   const DAYS = ['2026-08-13','2026-08-14','2026-08-15','2026-08-16','2026-08-17'];
+  const PERIOD_LABEL = { dia:'☀ Feria de Día', noche:'☾ Feria de Noche' };
+  const VENUE_LABEL = { plaza:'Plaza de la Constitución', caseta:'Caseta de la Juventud', otros:'Otras actividades' };
   let activeProgDay = DAYS[0];
 
   function renderProgTabs(){
@@ -395,16 +422,34 @@ footer{
     renderProgList();
   });
 
+  function entryHtml(e){
+    return '<li><span class="time">'+(e.time || '—')+'</span><div class="info"><strong>'+e.title+'</strong><span class="cat">'+e.cat+'</span>'+(e.place ? '<span class="place">'+e.place+'</span>' : '')+'</div></li>';
+  }
+
   function renderProgList(){
     const list = document.getElementById('prog-list');
     const entries = PROGRAMA[activeProgDay] || [];
+    list.className = '';
     if(entries.length === 0){
-      list.innerHTML = '<li class="programa-empty">Programa por confirmar para este día.</li>';
+      list.innerHTML = '<p class="programa-empty">Programa por confirmar para este día.</p>';
       return;
     }
-    list.innerHTML = entries.map(e =>
-      '<li><span class="time">'+(e.time || '—')+'</span><div class="info"><strong>'+e.title+'</strong><span class="cat">'+e.cat+'</span>'+(e.place ? '<span class="place">'+e.place+'</span>' : '')+'</div></li>'
-    ).join('');
+    const periods = ['dia','noche'];
+    const venues = ['plaza','caseta','otros'];
+    let html = '';
+    periods.forEach(p=>{
+      const periodEntries = entries.filter(e=>e.period===p);
+      if(periodEntries.length === 0) return;
+      html += '<div class="period-block"><p class="period-heading">'+PERIOD_LABEL[p]+'</p>';
+      venues.forEach(v=>{
+        const venueEntries = periodEntries.filter(e=>e.venue===v);
+        if(venueEntries.length === 0) return;
+        html += '<div class="venue-block '+v+'"><p class="venue-heading">'+VENUE_LABEL[v]+'</p><ul class="venue-list">' +
+          venueEntries.map(entryHtml).join('') + '</ul></div>';
+      });
+      html += '</div>';
+    });
+    list.innerHTML = html;
   }
 
   renderProgTabs();
