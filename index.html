@@ -275,7 +275,7 @@ footer{
   <div class="lights" id="lights"></div>
   <p class="eyebrow">Ayuntamiento de Monda</p>
   <h1 class="title">Feria de <em>Monda</em> 2026</h1>
-  <p class="subdate">Del <strong>13</strong> al <strong>17 de agosto</strong> &mdash; fin a las <strong>8:00 h</strong> del día 17</p>
+  <p class="subdate">Del <strong>13</strong> (23:00 h) al <strong>17 de agosto</strong> &mdash; fin a las <strong>8:00 h</strong></p>
 
   <div class="counters">
     <div class="counter-card inicio">
@@ -301,7 +301,7 @@ footer{
   const lightsEl = document.getElementById('lights');
   for(let i=0;i<11;i++){ const s=document.createElement('span'); lightsEl.appendChild(s); }
 
-  const START = new Date('2026-08-13T00:00:00');
+  const START = new Date('2026-08-13T23:00:00');
   const END   = new Date('2026-08-17T08:00:00');
 
   function pad(n){ return String(n).padStart(2,'0'); }
