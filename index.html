@@ -136,6 +136,41 @@ h1.title em{
   font-size:19px;
   color:var(--gold);
 }
+
+/* Fin de feria - sorpresa festiva */
+.fin-surprise{ text-align:center; }
+.fin-surprise .fin-title{
+  font-family:'Fraunces',serif;
+  font-weight:800;
+  font-size:20px;
+  color:var(--gold);
+  margin:0 0 4px;
+}
+.fin-surprise .fin-emoji{
+  font-size:30px;
+  display:inline-block;
+  animation:cheers 1.1s ease-in-out infinite;
+  margin-bottom:6px;
+}
+@keyframes cheers{
+  0%,100%{ transform:rotate(0deg) translateY(0); }
+  25%{ transform:rotate(-14deg) translateY(-3px); }
+  50%{ transform:rotate(0deg) translateY(0); }
+  75%{ transform:rotate(14deg) translateY(-3px); }
+}
+.fin-surprise ul{
+  list-style:none;
+  margin:10px 0 0;
+  padding:0;
+  text-align:left;
+  font-size:13.5px;
+  color:#e9e4d6;
+}
+.fin-surprise li{
+  padding:5px 0;
+  border-bottom:1px dashed rgba(255,248,236,0.15);
+}
+.fin-surprise li:last-child{border-bottom:none;}
 footer{
   margin-top:44px;
   font-family:'JetBrains Mono',monospace;
@@ -321,9 +356,30 @@ footer{
     const secs = s%60;
     el.innerHTML = '<div class="digits">'+block(days,'Días')+block(hours,'Horas')+block(mins,'Min')+block(secs,'Seg')+'</div>';
   }
+
+  const CERVEZAS_FIN_FERIA = [
+    '🍺 La del "hemos sobrevivido"',
+    '🍺 La del reencuentro con tu propia cama',
+    '🍺 La del descanso del guerrero ferial',
+    '🍺 La de "hasta la Feria del año que viene"'
+  ];
+  function renderFinSurprise(el){
+    el.innerHTML =
+      '<div class="fin-surprise">' +
+        '<span class="fin-emoji">🍻</span>' +
+        '<p class="fin-title">¡Feria terminada!</p>' +
+        '<ul>' + CERVEZAS_FIN_FERIA.map(c=>'<li>'+c+'</li>').join('') + '</ul>' +
+      '</div>';
+  }
+
   function tick(){
     renderCounter(document.getElementById('cd-inicio'), START, '¡La feria ha comenzado!');
-    renderCounter(document.getElementById('cd-fin'), END, 'La feria ha finalizado');
+    const finEl = document.getElementById('cd-fin');
+    if(END - new Date() <= 0){
+      renderFinSurprise(finEl);
+    } else {
+      renderCounter(finEl, END, '');
+    }
   }
   tick();
   setInterval(tick, 1000);
